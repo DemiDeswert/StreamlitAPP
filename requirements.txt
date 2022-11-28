@@ -10,3 +10,4 @@ Streamlit
 Pillow
 Roboflow
 pickles
+streamlit_webrtc
