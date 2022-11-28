@@ -6,7 +6,7 @@ import io
 def load_image():
     uploaded_file = st.file_uploader(label='Pick an image to test')
     if uploaded_file is not None:
-        image_data = uploaded_file.getvalue()
+        image_data = uploaded_file
         st.image(image_data)
         return Image.open(io.BytesIO(image_data))
     else:
