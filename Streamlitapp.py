@@ -3,17 +3,27 @@ import pickle
 from PIL import Image
 import io
 import os
+UPLOAD_FOLDER = '/path/to/the/uploads'
+ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif'}
+from PIL import Image
 
-def load_image():
-    uploaded_file = st.file_uploader(label='Pick an image to test')
-    if uploaded_file is not None:
-        image =os.stat(str(uploaded_file))
-        return image
-    else:
-        return None
+@st.cache
+def load_image(image_file):
+    img = Image.open(image_file)
+    return img
+
 def main():
     st.title('Pretrained model demo')
-    image = load_image()
+    image_file = st.file_uploader("Upload An Image",type=['png','jpeg','jpg'])
+    if image_file is not None:
+        file_details = {"FileName":image_file.name,"FileType":image_file.type}
+        st.write(file_details)
+        img = load_image(image_file)
+        st.image(img,height=250,width=250)
+        with open(os.path.join("tempDir",image_file.name),"wb") as f: 
+            f.write(image_file.getbuffer())         
+    st.success("Saved File")
+    image =load_image(image_file)
     result = st.button('Run on image')
     model = pickle.load(open('model.pkl', 'rb'))
     if result:
