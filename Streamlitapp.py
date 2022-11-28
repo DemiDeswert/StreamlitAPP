@@ -18,7 +18,7 @@ def main():
         st.write('Calculating results...')
         predictionimg=""
         model.predict(image, confidence=40, overlap=30).save(predictionimg)
-        prediction = Image.open(predictionimgs)
+        prediction = Image.open(predictionimg)
         st.image(prediction)
 
 if __name__ == '__main__':
