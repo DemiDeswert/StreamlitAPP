@@ -11,3 +11,5 @@ Pillow
 Roboflow
 pickles
 streamlit_webrtc
+click == 7.0.0
+dotenv
