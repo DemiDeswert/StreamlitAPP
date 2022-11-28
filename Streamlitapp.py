@@ -16,8 +16,8 @@ def main():
     model = pickle.load(open('model.pkl', 'rb'))
     if result:
         st.write('Calculating results...')
-        model.predict(image, confidence=40, overlap=30).save("prediction.jpg")
-        prediction = Image.open('prediction.jpg')
+        model.predict(image, confidence=40, overlap=30).save("./predictions/prediction.jpg")
+        prediction = Image.open('./predictions/prediction.jpg')
         st.image(prediction)
 
 if __name__ == '__main__':
