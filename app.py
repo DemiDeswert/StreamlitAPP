@@ -178,20 +178,14 @@ def logo_detection():
                     image.paste(button_img, (int(x1), int(y1)))
             return np.asarray(image)
 
-        def recv(self):
+        def recv(self, frame: av.VideoFrame) -> av.VideoFrame:
             """
             Recieves images and sends annotated images:
             gets webcam image, does some preprocessing and calls the
             annotated function above to put bounding boxes on the detections and
             finally returns the annotated video frame.
             """
-          
-            uploaded_file = st.file_uploader(label='Pick an image to test')
-            if uploaded_file is not None:
-                image_data = uploaded_file.getvalue()
-                st.image(image_data)
-                image=  Image.open(io.BytesIO(image_data))
-            image = image.to_ndarray(format="bgr24")
+            image = frame.to_ndarray(format="bgr24")
 
             # Resize (while maintaining the aspect ratio) to improve speed and save bandwidth
             # roboflow_size is set in logo_detection when we set up the url and query parameters
