@@ -19,7 +19,6 @@ def main():
         file_details = {"FileName":image_file.name,"FileType":image_file.type}
         st.write(file_details)
         img = load_image(image_file)
-        st.image(img,height=250,width=250)
         with open(os.path.join("tempDir",image_file.name),"wb") as f: 
             f.write(image_file.getbuffer())         
     st.success("Saved File")
